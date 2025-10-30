@@ -93,13 +93,13 @@ Catatan: Proyek ini memakai helper path relatif `config/paths.php` dengan fungsi
 - `includes/functions.php`: utilitas (format rupiah, sanitize, generator ID, stok, dll). Fungsi `updateStokBarang` didesain agar aman dipakai dalam transaksi aktif.
 
 ### Screenshot
-Letakkan file gambar screenshot Anda di folder `assets/image/` lalu sesuaikan path di bawah. Contoh penamaan:
+Letakkan file gambar screenshot Anda di folder `assets/screenshot/` lalu sesuaikan path di bawah. Contoh penamaan:
 
-![Login](assets/image/screenshot-login.png)
-![Dashboard Admin](assets/image/screenshot-admin-dashboard.png)
-![Dashboard Kasir](assets/image/screenshot-kasir-dashboard.png)
+![Login](assets/screenshot/screenshot-login.png)
+![Dashboard Admin](assets/screenshot/screenshot-admin-dashboard.png)
+![Dashboard Kasir](assets/screenshot/screenshot-kasir-dashboard.png)
 
-Jika belum ada folder `assets/image/`, silakan buat terlebih dahulu.
+Jika belum ada folder `assets/screenshot/`, silakan buat terlebih dahulu.
 
 ### Catatan Implementasi
 - Form tambah/edit dipisah dari halaman daftar untuk modul: `daftar_barang`, `kategori_barang`, `user`, dan `metode_pembayaran` agar UI rapi.
