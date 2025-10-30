@@ -1,0 +1,21 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Redirect to login if not authenticated (optional)
+# RewriteCond %{REQUEST_URI} !^/login\.php$
+# RewriteCond %{HTTP_COOKIE} !PHPSESSID [NC]
+# RewriteRule ^(.*)$ /login.php [R=302,L]
+
+# Protect sensitive files
+<FilesMatch "\.(sql|md|log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Default charset
+AddDefaultCharset UTF-8
+
+# PHP settings
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+
