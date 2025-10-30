@@ -96,10 +96,12 @@
 - Username: `kasir` / Password: `kasir` (Kasir)
 
 ### 🚀 Cara Menjalankan (Laragon/XAMPP)
-1. Clone atau salin project ini ke folder web server (misalnya Laragon: `C:\laragon\www\kasir-sakpore`).
+1. Clone atau salin project ini ke folder web server (misalnya Laragon: `C:\laragon\www\KASIR-SAKPORE
+`).
 2. Pastikan `Apache` dan `MySQL` berjalan.
 3. Import `database.sql`.
-4. Akses lewat browser ke alamat subfolder Anda, contoh: `http://localhost/kasir-sakpore/`.
+4. Akses lewat browser ke alamat subfolder Anda, contoh: `http://localhost/KASIR-SAKPORE
+/`.
 
 Catatan: Proyek ini memakai helper path relatif `config/paths.php` dengan fungsi `getNavPath()` dan `getAssetPath()` agar semua link dan asset tetap benar meskipun berada di subfolder.
 
