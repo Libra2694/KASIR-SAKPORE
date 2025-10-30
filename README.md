@@ -1,123 +1,113 @@
-SAKPORE – Aplikasi Kasir (PHP Native)
+## Aplikasi Kasir SAKPORE (PHP Native)
 
-Deskripsi Singkat
-Aplikasi kasir berbasis web menggunakan PHP Native dan MySQLi dengan struktur kode rapi, aman (prepared statements), serta dukungan role Admin dan Kasir. Fitur utama meliputi manajemen barang, kategori, user, metode/akun pembayaran, pembelian stok, transaksi kasir, serta laporan dan grafik statistik (Chart.js) pada dashboard admin.
+Aplikasi kasir berbasis web menggunakan PHP Native dan MySQLi, dengan role Admin dan Kasir. Fokus pada struktur kode rapi, keamanan dasar (prepared statements), dan kemudahan deploy di Laragon/XAMPP. Sudah dilengkapi grafik statistik pada dashboard Admin (Chart.js).
 
-Fitur Utama
-- Autentikasi & Session: login, logout, proteksi halaman, role-based access (Admin/Kasir).
-- Master Data:
-  - Kategori Barang (CRUD terpisah: list dan tambah/edit).
-  - Daftar Barang (CRUD terpisah + tambah stok terpisah).
-  - User (CRUD terpisah, role Admin/Kasir).
-  - Metode Pembayaran & Akun Pembayaran (form terpisah agar rapi).
-- Pembelian Barang: input pembelian stok; harga satuan otomatis mengikuti harga pokok barang; total harga dihitung otomatis.
-- Transaksi Kasir: simpan transaksi dengan detail, update stok atomik (transaction MySQL), feedback sukses + auto-redirect.
-- Laporan: transaksi, pembelian, keuangan, detail transaksi.
-- Dashboard Admin: statistik 7 hari (jumlah transaksi, pendapatan), perbandingan pemasukan vs pengeluaran 6 bulan terakhir, top 5 kategori; visualisasi dengan Chart.js.
-- Manajemen Path Dinamis: helper `getNavPath()` dan `getAssetPath()` untuk link/asset agar tidak terjadi Not Found saat project di subfolder (mis. Laragon).
+### Fitur Utama
+- **Autentikasi & Autorisasi**: Login, logout, session, role Admin/Kasir.
+- **Master Data**:
+  - Kategori Barang (CRUD, terpisah antara daftar dan tambah/edit)
+  - Daftar Barang (CRUD, tambah/edit dipisah dari daftar, tambah stok)
+  - User Management (CRUD, tambah/edit dipisah dari daftar)
+  - Metode & Akun Pembayaran (CRUD, form terpisah)
+- **Transaksi**:
+  - Kasir: Simpan transaksi dengan detail, update stok dalam transaksi (atomic/transaction)
+  - Pembelian Barang: Harga satuan otomatis dari harga pokok, total otomatis
+- **Laporan**: Transaksi, Pembelian, Keuangan, Detail Transaksi
+- **Dashboard Admin**: Grafik transaksi 7 hari, pendapatan 7 hari, pemasukan vs pengeluaran 6 bulan, top 5 kategori (Chart.js)
+- **Path Helper**: Otomatisasi path relatif dengan `config/paths.php` agar aman saat project diletakkan dalam subfolder
 
-Teknologi
-- PHP 7+/8+ (Native, MySQLi Prepared Statements)
-- MySQL / MariaDB
+### Teknologi
+- PHP Native (MySQLi, prepared statements)
+- MySQL
 - HTML, CSS, JavaScript (vanilla)
-- Chart.js (via CDN) untuk grafik dashboard
+- Chart.js untuk visualisasi
 
-Struktur Proyek (ringkas)
+### Struktur Proyek
 ```
 .
+├── index.php
+├── login.php
+├── logout.php
+├── .htaccess
+├── database.sql
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── main.js
+├── config/
+│   ├── database.php
+│   ├── paths.php
+│   └── session.php
+├── includes/
+│   ├── header.php
+│   ├── footer.php
+│   └── functions.php
 ├── admin/
 │   ├── dashboard.php
 │   ├── daftar_barang/
-│   │   ├── index.php         # List barang
-│   │   ├── tambah.php        # Tambah/Edit barang (dipisah)
-│   │   └── tambah_stok.php   # Tambah stok
+│   │   ├── index.php
+│   │   ├── tambah.php
+│   │   └── tambah_stok.php
 │   ├── kategori_barang/
-│   │   ├── index.php         # List kategori
-│   │   └── tambah.php        # Tambah/Edit kategori (dipisah)
-│   ├── user/
-│   │   ├── index.php         # List user
-│   │   └── tambah.php        # Tambah/Edit user (dipisah)
+│   │   ├── index.php
+│   │   └── tambah.php
 │   ├── metode_pembayaran/
-│   │   ├── index.php         # List metode & akun
-│   │   ├── tambah_metode.php # Tambah metode
-│   │   └── tambah_akun.php   # Tambah/Edit akun pembayaran
+│   │   ├── index.php
+│   │   ├── tambah_metode.php
+│   │   └── tambah_akun.php
 │   ├── pembelian_barang/
-│   │   └── index.php         # Form + list pembelian
+│   │   └── index.php
 │   └── laporan/
 │       ├── transaksi.php
 │       ├── pembelian.php
 │       ├── keuangan.php
 │       └── detail_transaksi.php
-├── kasir/
-│   ├── dashboard.php
-│   ├── daftar_barang.php
-│   ├── transaksi.php
-│   └── get_akun_pembayaran.php
-├── assets/
-│   ├── css/style.css
-│   ├── js/main.js
-│   └── screenshot/           # Simpan screenshot di sini
-├── config/
-│   ├── database.php          # Koneksi & helper query (getConnection, query, ...)
-│   ├── session.php           # Helper login/role (requireLogin, requireAdmin, ...)
-│   └── paths.php             # Helper path (getNavPath, getAssetPath)
-├── includes/
-│   ├── header.php
-│   ├── footer.php
-│   └── functions.php         # Helper util (formatRupiah, sanitize, generateId, ...)
-├── database.sql              # Skema + seed data awal
-├── index.php                 # Redirect sesuai status login
-├── login.php                 # Halaman login
-└── logout.php                # Proses logout
+└── kasir/
+    ├── dashboard.php
+    ├── transaksi.php
+    └── daftar_barang.php
 ```
 
-Kredensial Login (Default)
+### Persiapan Database
+1. Buat database MySQL baru atau gunakan yang sudah ada.
+2. Import file `database.sql` ke database tersebut (berisi schema + sample data).
+3. Sesuaikan kredensial koneksi di `config/database.php` bila diperlukan.
+
+### Kredensial Login (Default)
 - Username: `admin` / Password: `admin` (Admin)
 - Username: `kasir` / Password: `kasir` (Kasir)
 
-Instalasi & Menjalankan
-1) Clone/Salin Project ke webroot (contoh Laragon):
-   - Misal ke `C:\laragon\www\Joki\random` atau subfolder lain.
+### Cara Menjalankan (Laragon/XAMPP)
+1. Clone atau salin project ini ke folder web server (misalnya Laragon: `C:\laragon\www\Joki\random`).
+2. Pastikan `Apache` dan `MySQL` berjalan.
+3. Import `database.sql`.
+4. Akses lewat browser ke alamat subfolder Anda, contoh: `http://localhost/Joki/random/`.
 
-2) Buat Database dan Import:
-   - Buat database baru, contoh: `kasir_sakpore`.
-   - Import file `database.sql` ke database tersebut (via phpMyAdmin/HeidiSQL/CLI).
+Catatan: Proyek ini memakai helper path relatif `config/paths.php` dengan fungsi `getNavPath()` dan `getAssetPath()` agar semua link dan asset tetap benar meskipun berada di subfolder.
 
-3) Konfigurasi Koneksi Database:
-   - Buka `config/database.php` dan sesuaikan host, user, password, dan nama database jika perlu.
+### Konfigurasi Penting
+- `config/database.php`: fungsi `getConnection()` dan helper `query`, `queryArray`, `queryOne`.
+- `config/session.php`: helper login/logout, role guard (`requireAdmin`, `requireKasir`).
+- `config/paths.php`: `getNavPath($targetPath)` dan `getAssetPath($file)` untuk path relatif.
+- `includes/functions.php`: utilitas (format rupiah, sanitize, generator ID, stok, dll). Fungsi `updateStokBarang` didesain agar aman dipakai dalam transaksi aktif.
 
-4) Akses Aplikasi di Browser:
-   - Jika menggunakan Laragon: `http://localhost/Joki/random/`
-   - Aplikasi otomatis redirect ke `login.php` jika belum login.
+### Screenshot
+Letakkan file gambar screenshot Anda di folder `assets/image/` lalu sesuaikan path di bawah. Contoh penamaan:
 
-Catatan Penting Path (Subfolder Friendly)
-- Semua link dan asset menggunakan helper `getNavPath()` dan `getAssetPath()` dari `config/paths.php`.
-- Ini memastikan path relatif selalu benar walaupun project berada di subfolder.
-- Jika menambah halaman baru, sertakan `paths.php` dan gunakan helper tersebut untuk href/src.
+![Login](assets/image/screenshot-login.png)
+![Dashboard Admin](assets/image/screenshot-admin-dashboard.png)
+![Dashboard Kasir](assets/image/screenshot-kasir-dashboard.png)
 
-Keamanan & Praktik Baik
-- Semua operasi database menggunakan prepared statements (MySQLi) untuk mencegah SQL Injection.
-- Transaksi kasir menggunakan MySQL transaction untuk menjamin konsistensi stok.
-- Input disanitasi melalui helper `sanitize()` di `includes/functions.php`.
+Jika belum ada folder `assets/image/`, silakan buat terlebih dahulu.
 
-Grafik Statistik (Dashboard Admin)
-- Menggunakan Chart.js (CDN) untuk: jumlah transaksi 7 hari, pendapatan 7 hari, pemasukan vs pengeluaran 6 bulan, top 5 kategori.
-- Data diambil melalui query yang telah dioptimasi dengan agregasi per tanggal/bulan.
+### Catatan Implementasi
+- Form tambah/edit dipisah dari halaman daftar untuk modul: `daftar_barang`, `kategori_barang`, `user`, dan `metode_pembayaran` agar UI rapi.
+- Transaksi kasir disimpan dalam satu transaksi database (atomic) untuk integritas data dan performa.
+- Pembelian barang: harga satuan otomatis mengikuti harga pokok barang, total harga dihitung otomatis di frontend serta dikirim sebagai nilai murni ke backend.
+- Dashboard Admin menggunakan Chart.js via CDN.
 
-Screenshot
-- Screenshot tersedia di folder `assets/screenshot`.
-- Silakan tambahkan/ubah sesuai kebutuhan dokumentasi GitHub Anda.
-
-Troubleshooting
-- Not Found saat klik menu/asset:
-  - Pastikan file `config/paths.php` disertakan di halaman dan gunakan `getNavPath()`/`getAssetPath()`.
-  - Hindari hardcode path absolut seperti `/admin/...` atau `/assets/...`.
-- Error bind_param (jumlah/tipe tidak cocok):
-  - Pastikan string tipe (`s`, `i`, `d`, `b`) sesuai jumlah dan tipe variabel yang di-bind.
-- Transaksi Kasir loading lama:
-  - Pastikan update stok menggunakan koneksi dan transaksi yang sama (lihat `kasir/transaksi.php`).
-
-Lisensi
-Proyek ini untuk keperluan pembelajaran/tugas. Gunakan sesuai kebutuhan Anda.
+### Lisensi
+Gunakan bebas untuk pembelajaran dan pengembangan internal. Sesuaikan sesuai kebutuhan.
 
 
