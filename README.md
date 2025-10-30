@@ -96,10 +96,10 @@
 - Username: `kasir` / Password: `kasir` (Kasir)
 
 ### 🚀 Cara Menjalankan (Laragon/XAMPP)
-1. Clone atau salin project ini ke folder web server (misalnya Laragon: `C:\laragon\www\Joki\random`).
+1. Clone atau salin project ini ke folder web server (misalnya Laragon: `C:\laragon\www\kasir-sakpore`).
 2. Pastikan `Apache` dan `MySQL` berjalan.
 3. Import `database.sql`.
-4. Akses lewat browser ke alamat subfolder Anda, contoh: `http://localhost/Joki/random/`.
+4. Akses lewat browser ke alamat subfolder Anda, contoh: `http://localhost/kasir-sakpore/`.
 
 Catatan: Proyek ini memakai helper path relatif `config/paths.php` dengan fungsi `getNavPath()` dan `getAssetPath()` agar semua link dan asset tetap benar meskipun berada di subfolder.
 
@@ -110,8 +110,6 @@ Catatan: Proyek ini memakai helper path relatif `config/paths.php` dengan fungsi
 - `includes/functions.php`: utilitas (format rupiah, sanitize, generator ID, stok, dll). Fungsi `updateStokBarang` didesain agar aman dipakai dalam transaksi aktif.
 
 ### 🖼️ Screenshot
-Letakkan file gambar di `assets/screenshot/`. Contoh:
-
 <div align="center">
 
 | Login | Dashboard Admin | Dashboard Kasir |
@@ -119,8 +117,6 @@ Letakkan file gambar di `assets/screenshot/`. Contoh:
 | ![Login](assets/screenshot/screenshot-login.png) | ![Dashboard Admin](assets/screenshot/screenshot-admin-dashboard.png) | ![Dashboard Kasir](assets/screenshot/screenshot-kasir-dashboard.png) |
 
 </div>
-
-Jika belum ada folder `assets/screenshot/`, silakan buat terlebih dahulu.
 
 ### 📝 Catatan Implementasi
 - Form tambah/edit dipisah dari halaman daftar untuk modul: `daftar_barang`, `kategori_barang`, `user`, dan `metode_pembayaran` agar UI rapi.
@@ -130,5 +126,13 @@ Jika belum ada folder `assets/screenshot/`, silakan buat terlebih dahulu.
 
 ### 📄 Lisensi
 Gunakan bebas untuk pembelajaran dan pengembangan internal. Sesuaikan sesuai kebutuhan.
+Proyek ini dirilis di bawah lisensi [MIT License](LICENSE).  
+Bebas digunakan, dimodifikasi, dan didistribusikan selama mencantumkan copyright.
+
+Semoga membantu! 😊
+
+MIT License - © 2025 Libra
+
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 
